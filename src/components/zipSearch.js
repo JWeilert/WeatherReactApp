@@ -4,10 +4,10 @@ import LookupWeather from "./weatherSearch";
 function LookupZip() {
   var [zip, setZip] = useState(null);
   var [zipData, setZipData] = useState(null);
-
+  var [loading, setLoading] = useState(false);
   var [details, setDetails] = useState(null);
-
   function loadSearch() {
+    setLoading(true);
     fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${zip}`)
       .then((response) => response.json())
       .then((data) => {
@@ -26,8 +26,11 @@ function LookupZip() {
               ]);
               console.log(details);
             }
+          } else {
+            setLoading(false);
           }
         } catch (error) {
+          setLoading(false);
           console.log(error);
         }
       });
@@ -35,7 +38,7 @@ function LookupZip() {
 
   async function search() {
     // zip = document.getElementById("zipCode").value;
-    setZip(document.getElementById("zipCode").value);
+    setZip(document.getElementById("zipCode").value.trim());
   }
 
   useEffect(() => {
@@ -56,7 +59,11 @@ function LookupZip() {
       </button>
       <h1>{details?.[1]}</h1>
       <h1>{details?.[0]}</h1>
-      <LookupWeather details={details} />
+      <LookupWeather
+        details={details}
+        loading={loading}
+        setLoading={setLoading}
+      />
     </div>
   );
 }

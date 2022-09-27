@@ -47,6 +47,7 @@ function LookupZip() {
 
   return (
     <div>
+      {loading ? <h1>Loading</h1> : <h1>Not Loading</h1>}
       <h1>{zip}</h1>
       <input id="zipCode" type="text" pattern="[0-9]{5}" />
       <button

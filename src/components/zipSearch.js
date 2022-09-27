@@ -24,6 +24,7 @@ function LookupZip() {
                 zipData.results[0].longitude,
                 zipData.results[0].timezone,
               ]);
+              console.log(details);
             }
           }
         } catch (error) {

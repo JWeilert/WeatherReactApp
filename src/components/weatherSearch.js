@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import "../CSS/Weather.css";
 
 function LookupWeather(props) {
   var [weatherData, setWeatherData] = useState("");
@@ -74,28 +75,69 @@ function LookupWeather(props) {
   if (dailyView !== true) {
     return (
       <div>
-        <div>
-          <h4>
-            Current and Next Hour Temp:
-            <br />
-            {hourTemprature?.[0]}
-            <br />
-            {hourTemprature?.[1]}
-            <br />
-            {hourTemprature?.[2]}
-            <br />
-            {hourTemprature?.[3]}
-            <br />
-            {hourTemprature?.[4]}
-            <br />
-            {hourTemprature?.[5]}
-            <br />
-            {hourTemprature?.[6]}
-            <br />
-            {hourTemprature?.[7]}
-            <br />
-            {hourTemprature?.[8]}
-          </h4>
+        <h1>
+          {hourTemprature?.[0]}
+          <sup>º</sup>
+        </h1>
+        <div id="timeContainer">
+          <div id="times">
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[1]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[2]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[3]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[4]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[5]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[6]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Time</p>
+              <hr />
+              <p>
+                {hourTemprature?.[7]}
+                <sup>º</sup>
+              </p>
+            </div>
+          </div>
         </div>
         <button
           onClick={() => {

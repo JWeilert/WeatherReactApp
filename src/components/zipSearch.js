@@ -6,6 +6,9 @@ function LookupZip() {
   var [zipData, setZipData] = useState(null);
   var [loading, setLoading] = useState(false);
   var [details, setDetails] = useState(null);
+  var [city, setCity] = useState();
+  var [state, setState] = useState();
+
   function loadSearch() {
     setLoading(true);
     fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${zip}`)
@@ -24,8 +27,9 @@ function LookupZip() {
                 zipData.results[0].longitude,
                 zipData.results[0].timezone,
               ]);
-              console.log(details);
             }
+            setCity(zipData.results[0].admin3);
+            setState(zipData.results[0].admin1);
           } else {
             setLoading(false);
           }
@@ -45,27 +49,39 @@ function LookupZip() {
     loadSearch();
   }, [zip]);
 
-  return (
-    <div>
-      {loading ? <h1>Loading</h1> : <h1>Not Loading</h1>}
-      <h1>{zip}</h1>
-      <input id="zipCode" type="text" pattern="[0-9]{5}" />
-      <button
-        type="button"
-        onClick={() => {
-          search();
-        }}
-      >
-        Click
-      </button>
-      <h1>{details?.[1]}</h1>
-      <h1>{details?.[0]}</h1>
-      <LookupWeather
-        details={details}
-        loading={loading}
-        setLoading={setLoading}
-      />
-    </div>
-  );
+  if (loading === false) {
+    return (
+      <div>
+        <input id="zipCode" type="text" pattern="[0-9]{5}" />
+        <button
+          type="button"
+          onClick={() => {
+            search();
+          }}
+        >
+          Click
+        </button>
+        <h3>
+          {city} {state}
+        </h3>
+        <LookupWeather
+          details={details}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      </div>
+    );
+  } else if (loading === true) {
+    return (
+      <div>
+        <h1>Loading</h1>
+        <LookupWeather
+          details={details}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      </div>
+    );
+  }
 }
 export default LookupZip;

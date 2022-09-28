@@ -1,21 +1,78 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import "../CSS/Weather.css";
+import Alien from "../images/wi-cloud.svg";
+import {
+  ClearSkys,
+  MainlyClear,
+  PartlyCloudy,
+  Overcast,
+} from "../images/images";
 
 function LookupWeather(props) {
   var [weatherData, setWeatherData] = useState("");
   var [hour, setHour] = useState("");
   var [dailyView, setDailyView] = useState(false);
-  var [hourTemprature, setHourTemprature] = useState();
+
   var [dailyTempratureMax, setDailyTempratureMax] = useState();
   var [dailyTempratureMin, setDailyTempratureMin] = useState();
+  const [images, setImages] = useState({
+    0: {
+      src: { ClearSkys },
+      disc: "Clear skys",
+    },
+    1: {
+      src: { MainlyClear },
+      disc: "Mainly Clear",
+    },
+    2: {
+      src: { PartlyCloudy },
+      disc: "Partly Cloudy",
+    },
+    3: {
+      src: "Overcast",
+      disc: "Overcast",
+    },
+    45: {
+      src: "../images/wi-day-fog",
+      disc: "Foggy",
+    },
+    48: {
+      src: "../images/wi-day-fog",
+      disc: "Foggy",
+    },
+    51: {
+      src: "wi-day-sprinkle",
+      disc: "Light drizzle",
+    },
+    53: {
+      src: "wi-day-sprinkle",
+      disc: "Moderate drizzle",
+    },
+    55: {
+      src: "wi-day-sprinkle",
+      disc: "Dense drizzle",
+    },
+    56: {
+      src: "wi-day-snow",
+      disc: "Light freezing drizzle",
+    },
+    57: {
+      src: "wi-day-snow",
+      disc: "Dense freezing drizzle",
+    },
+    61: {},
+    63: {},
+    65: {},
+  });
 
-  var hourTempratureArray = [];
   var dailyTempratureArrayMax = [];
   var dailyTempratureArrayMin = [];
 
   function loadSearch() {
-    hourTempratureArray = [];
+    console.log(
+      images[weatherData?.hourly?.weathercode[parseFloat(hour) + 1]]?.src
+    );
     dailyTempratureArrayMax = [];
     dailyTempratureArrayMin = [];
     if (props.details !== null) {
@@ -34,12 +91,6 @@ function LookupWeather(props) {
           weatherData = data;
           setWeatherData(weatherData);
           console.log(weatherData);
-        })
-        .then(() => {
-          for (var i = hour; i <= parseInt(hour) + 7; i++) {
-            hourTempratureArray.push(weatherData.hourly.temperature_2m[i]);
-          }
-          setHourTemprature(hourTempratureArray);
         })
         .then(() => {
           for (
@@ -76,7 +127,7 @@ function LookupWeather(props) {
     return (
       <div>
         <h1>
-          {hourTemprature?.[0]}
+          {weatherData?.hourly?.temperature_2m[hour]}
           <sup>º</sup>
         </h1>
         <div id="timeContainer">
@@ -84,56 +135,71 @@ function LookupWeather(props) {
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img
+                src={
+                  images[
+                    weatherData?.hourly?.weathercode[parseFloat(hour) + 1].src
+                  ]
+                }
+                alt="Pic"
+              />
+
               <p>
-                {hourTemprature?.[1]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 1]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[2]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 2]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[3]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 3]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[4]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 4]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[5]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 5]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[6]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 6]}
                 <sup>º</sup>
               </p>
             </div>
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
+              <img src={Alien} alt="Pic" />
               <p>
-                {hourTemprature?.[7]}
+                {weatherData?.hourly?.temperature_2m[parseFloat(hour) + 7]}
                 <sup>º</sup>
               </p>
             </div>

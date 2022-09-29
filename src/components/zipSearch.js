@@ -37,7 +37,8 @@ function LookupZip() {
           setLoading(false);
           console.log(error);
         }
-      });
+      })
+      .then(setLoading(false));
   }
 
   async function search() {
@@ -64,22 +65,13 @@ function LookupZip() {
         <h3>
           {city} {state}
         </h3>
-        <LookupWeather
-          details={details}
-          loading={loading}
-          setLoading={setLoading}
-        />
+        <LookupWeather details={details} setLoading={setLoading} />
       </div>
     );
   } else if (loading === true) {
     return (
       <div>
         <h1>Loading</h1>
-        <LookupWeather
-          details={details}
-          loading={loading}
-          setLoading={setLoading}
-        />
       </div>
     );
   }

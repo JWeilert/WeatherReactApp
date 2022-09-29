@@ -28,14 +28,54 @@
     margin: 0em;
 }
 
+.hourTemp{
+    margin: 0em;
+}
+
 hr{
     margin: 0em
 }
 
-p{
+
+img{
+    margin: 0em;
+    width: 75%
+}
+
+#topBox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#thirdBox p{
     margin: 0em;
 }
 
-img{
-    margin: 0em
+#thirdBox h1{
+    margin: 0em;
+}
+
+#thirdBox{
+    width:30%
+}
+
+#secondBox{
+    width:30%
+}
+
+#secondBox img{
+    width:50%
+}
+
+#secondBox p{
+    margin: 0em;
+}
+
+#firstBox{
+    width:30%
+}
+
+h3{
+    margin:0em;
 }

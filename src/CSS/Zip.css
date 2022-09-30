@@ -1,0 +1,32 @@
+#searchBar{
+    background: rgb(211, 234, 234);
+    border-radius: 2em;
+    margin: 1em 40% 1em 40%;
+    display: flex;
+    backdrop-filter: blur(4px) saturate(180%);
+}
+
+#searchBar input{
+background: transparent;
+flex: 1;
+border: none;
+outline: none;
+font-size: 20;
+color:rgb(53, 78, 78);
+padding: .75em;
+}
+
+#searchBar button{
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    width: 17%;
+}
+
+
+#searchBar img{
+    margin: 0em;
+    width: fit-content;
+    height: fit-content;
+}

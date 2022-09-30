@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import LookupWeather from "./weatherSearch";
+import "../CSS/Zip.css";
+import { Search } from "../images/images";
 
 function LookupZip() {
   var [zip, setZip] = useState(null);
@@ -53,15 +55,23 @@ function LookupZip() {
   if (loading === false) {
     return (
       <div>
-        <input id="zipCode" type="text" pattern="[0-9]{5}" />
-        <button
-          type="button"
-          onClick={() => {
-            search();
-          }}
-        >
-          Click
-        </button>
+        <div id="searchBar">
+          <input
+            id="zipCode"
+            placeholder="Enter any Zip Code!"
+            type="text"
+            pattern="[0-9]{5}"
+            autoComplete="off"
+          />
+          <button
+            type="button"
+            onClick={() => {
+              search();
+            }}
+          >
+            <img src={Search} alt="Search button" />
+          </button>
+        </div>
         <h3>
           {city} {state}
         </h3>

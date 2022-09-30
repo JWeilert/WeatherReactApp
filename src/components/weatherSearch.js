@@ -9,6 +9,11 @@ import {
   Overcast,
   Fog,
   Drizzle,
+  FreezingDrizzle,
+  Rain,
+  FreezingRain,
+  SnowFall,
+  RainShowers,
 } from "../images/images";
 
 function LookupWeather(props) {
@@ -56,25 +61,56 @@ function LookupWeather(props) {
       disc: "Dense drizzle",
     },
     56: {
-      src: "wi-day-snow",
+      src: FreezingDrizzle,
       disc: "Light freezing drizzle",
     },
     57: {
-      src: "wi-day-snow",
+      src: FreezingDrizzle,
       disc: "Dense freezing drizzle",
     },
-    61: {},
-    63: {},
-    65: {},
+    61: { src: Rain, disc: "Slight rain" },
+    63: { src: Rain, disc: "Moderate rain" },
+    65: { src: Rain, disc: "Heavy rain" },
+    66: {
+      src: FreezingRain,
+      disc: "Slight freezing rain",
+    },
+    67: {
+      src: FreezingRain,
+      disc: "Heavy freezing rain",
+    },
+    71: {
+      src: SnowFall,
+      disc: "Slight snow fall",
+    },
+    73: {
+      src: SnowFall,
+      disc: "Moderate snow fall",
+    },
+    75: {
+      src: SnowFall,
+      disc: "Heavy snow fall",
+    },
+    77: {
+      src: SnowFall,
+      disc: "Snow grains",
+    },
+    80: {
+      src: RainShowers,
+      disc: "Slight rain showers",
+    },
+    81: {
+      src: RainShowers,
+      disc: "Moderate rain showers",
+    },
+    82: {
+      src: RainShowers,
+      disc: "Heavy rain showers",
+    },
   });
-
-  var dailyTempratureArrayMax = [];
-  var dailyTempratureArrayMin = [];
 
   function loadSearch() {
     setLoading(true);
-    dailyTempratureArrayMax = [];
-    dailyTempratureArrayMin = [];
     if (props.details !== null) {
       hour = new Date().toLocaleString("en-US", {
         hour12: false,
@@ -92,28 +128,7 @@ function LookupWeather(props) {
           setWeatherData(weatherData);
           console.log(weatherData);
         })
-        .then(() => {
-          for (
-            var i = 0;
-            i < weatherData.daily.temperature_2m_max.length;
-            i++
-          ) {
-            dailyTempratureArrayMax.push(
-              weatherData.daily.temperature_2m_max[i]
-            );
-          }
-          setDailyTempratureMax(dailyTempratureArrayMax);
-          for (
-            var i = 0;
-            i < weatherData.daily.temperature_2m_min.length;
-            i++
-          ) {
-            dailyTempratureArrayMin.push(
-              weatherData.daily.temperature_2m_min[i]
-            );
-          }
-          setDailyTempratureMin(dailyTempratureArrayMin);
-        })
+
         .then(setLoading(false));
     }
   }
@@ -138,6 +153,10 @@ function LookupWeather(props) {
               }
               alt="Pic"
             />
+            <p>
+              Current:
+              {images[weatherData?.hourly?.weathercode[parseFloat(hour)]]?.disc}
+            </p>
           </div>
           <div id="thirdBox">
             <h1>
@@ -150,8 +169,9 @@ function LookupWeather(props) {
             </p>
           </div>
         </div>
-        <div id="timeContainer">
-          <div id="times">
+        <div className="timeContainer">
+          <p className="upNext">Next hours...</p>
+          <div className="times">
             <div className="tempBox">
               <p className="time">Time</p>
               <hr />
@@ -243,7 +263,7 @@ function LookupWeather(props) {
                 <sup>º</sup>
               </p>
             </div>
-            <div className="tempBox">
+            <div className="tempBoxLast">
               <p className="time">Time</p>
               <hr />
               <img
@@ -260,21 +280,130 @@ function LookupWeather(props) {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => {
-            setDailyView(!dailyView);
-          }}
-        >
-          Daily View
-        </button>
+        {/* 
+        Next box
+        */}
+        <div className="timeContainer">
+          <p className="upNext">Next Days...</p>
+          <div className="times">
+            <div className="tempBox">
+              <p className="time">Today</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[0]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[0]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[0]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[1]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[1]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[1]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[2]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[2]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[2]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[3]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[3]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[3]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[4]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[4]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[4]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBox">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[5]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[5]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[5]}
+                <sup>º</sup>
+              </p>
+            </div>
+            <div className="tempBoxLast">
+              <p className="time">Day</p>
+              <hr />
+              <img
+                src={images[weatherData?.daily?.weathercode[6]]?.src}
+                alt="Pic"
+              />
+              <p className="dayTemp">
+                H: {weatherData?.daily?.temperature_2m_max[6]}
+                <sup>º</sup>
+              </p>
+              <p className="dayTemp">
+                L: {weatherData?.daily?.temperature_2m_min[6]}
+                <sup>º</sup>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     );
-  } else if (loading === true) {
-    return (
-      <div>
-        <h1>Loading</h1>
-      </div>
-    );
+  } else {
+    <h1>Loading</h1>;
   }
 }
 export default LookupWeather;

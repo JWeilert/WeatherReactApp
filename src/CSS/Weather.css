@@ -1,15 +1,16 @@
-#times{
+.times{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1em auto 1em auto;
+    margin: .5em auto 1em auto;
     height: 100%
 }
 
-#timeContainer{
-    background-color: aqua;
-    margin: 0 2em 0 2em;
-    padding: 0.5em
+.timeContainer{
+    background-color: rgb(171, 223, 219);
+    margin: 2em;
+    padding: 0.5em;
+    border-radius: 2em;
 }
 
 #nextHour{
@@ -17,8 +18,19 @@
     padding: 0em;
 }
 
+.upNext{
+    margin: .5em 0 0 0;
+    padding: 0em;
+}
+
 .tempBox{
-    border: 1px solid black;
+    border-right: .2em dotted black;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.tempBoxLast{
     width: 100%;
     height: 100%;
     display: inline-block;
@@ -26,26 +38,33 @@
 
 .time{
     margin: 0em;
+    border-bottom: 1px solid black;
+    color: none;
 }
 
 .hourTemp{
     margin: 0em;
 }
 
+.dayTemp{
+    margin: 0em;
+}
+
 hr{
-    margin: 0em
+    margin: 0em;
 }
 
 
 img{
     margin: 0em;
-    width: 75%
+    width: 75%;
 }
 
 #topBox{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin: 1em 15% 1em 15% 
 }
 
 #thirdBox p{
@@ -61,7 +80,9 @@ img{
 }
 
 #secondBox{
-    width:30%
+    width:30%;
+    border-right: .25em dotted black;
+    border-left: .25em dotted black;
 }
 
 #secondBox img{
@@ -78,4 +99,8 @@ img{
 
 h3{
     margin:0em;
+}
+
+.upNext{
+    text-align: left;
 }

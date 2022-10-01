@@ -8,7 +8,7 @@
 
 .timeContainer{
     background-color: rgb(171, 223, 219);
-    margin: 2em;
+    margin: 2em 15% 2em 15%;
     padding: 0.5em;
     border-radius: 2em;
 }
@@ -57,7 +57,7 @@ hr{
 
 img{
     margin: 0em;
-    width: 75%;
+    width: 60%;
 }
 
 #topBox{

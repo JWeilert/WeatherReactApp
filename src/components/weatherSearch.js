@@ -19,10 +19,9 @@ import {
 function LookupWeather(props) {
   var [weatherData, setWeatherData] = useState("");
   var [hour, setHour] = useState("");
-  var [dailyView, setDailyView] = useState(false);
-  var [loading, setLoading] = useState(false);
-  var [dailyTempratureMax, setDailyTempratureMax] = useState();
-  var [dailyTempratureMin, setDailyTempratureMin] = useState();
+
+  var [loading, setLoading] = useState(true);
+
   const [images, setImages] = useState({
     0: {
       src: ClearSkys,
@@ -127,9 +126,43 @@ function LookupWeather(props) {
           weatherData = data;
           setWeatherData(weatherData);
           console.log(weatherData);
+          getHour();
         })
-
         .then(setLoading(false));
+    }
+  }
+
+  function getDay(daysPast) {
+    const dayArray = [
+      "Monday",
+      "Tuesday",
+      "Wedensday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+    var day = new Date().toLocaleString("en-US", {
+      timeZone: props.details[2],
+      weekday: "long",
+    });
+    for (var i = 0; i < dayArray.length; i++) {
+      if (dayArray[i] === day) {
+        return dayArray[(i += daysPast) % 7];
+      }
+    }
+  }
+
+  function getHour(hoursPast) {
+    var hour = new Date().toLocaleString("en-US", {
+      timeZone: props.details[2],
+      hour12: "true",
+      hour: "2-digit",
+    });
+    if (parseInt(hour) + hoursPast !== 12) {
+      return `${(parseInt(hour) + hoursPast) % 12}:00`;
+    } else {
+      return "12:00";
     }
   }
 
@@ -142,9 +175,7 @@ function LookupWeather(props) {
       <div>
         <div id="topBox">
           <div id="firstBox">
-            <p>
-              {images[weatherData?.hourly?.weathercode[parseFloat(hour)]]?.disc}
-            </p>
+            <p>Filler</p>
           </div>
           <div id="secondBox">
             <img
@@ -154,7 +185,7 @@ function LookupWeather(props) {
               alt="Pic"
             />
             <p>
-              Current:
+              Current:{" "}
               {images[weatherData?.hourly?.weathercode[parseFloat(hour)]]?.disc}
             </p>
           </div>
@@ -173,7 +204,7 @@ function LookupWeather(props) {
           <p className="upNext">Next hours...</p>
           <div className="times">
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(1)}</p>
               <hr />
               <img
                 src={
@@ -189,7 +220,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(2)}</p>
               <hr />
               <img
                 src={
@@ -204,7 +235,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(3)}</p>
               <hr />
               <img
                 src={
@@ -219,7 +250,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(4)}</p>
               <hr />
               <img
                 src={
@@ -234,7 +265,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(5)}</p>
               <hr />
               <img
                 src={
@@ -249,7 +280,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Time</p>
+              <p className="time">{getHour(6)}</p>
               <hr />
               <img
                 src={
@@ -264,7 +295,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBoxLast">
-              <p className="time">Time</p>
+              <p className="time">{getHour(7)}</p>
               <hr />
               <img
                 src={
@@ -303,7 +334,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Day</p>
+              <p className="time">{getDay(1)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[1]]?.src}
@@ -319,7 +350,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Day</p>
+              <p className="time">{getDay(2)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[2]]?.src}
@@ -335,7 +366,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Day</p>
+              <p className="time">{getDay(3)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[3]]?.src}
@@ -351,7 +382,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Day</p>
+              <p className="time">{getDay(4)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[4]]?.src}
@@ -367,7 +398,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBox">
-              <p className="time">Day</p>
+              <p className="time">{getDay(5)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[5]]?.src}
@@ -383,7 +414,7 @@ function LookupWeather(props) {
               </p>
             </div>
             <div className="tempBoxLast">
-              <p className="time">Day</p>
+              <p className="time">{getDay(6)}</p>
               <hr />
               <img
                 src={images[weatherData?.daily?.weathercode[6]]?.src}

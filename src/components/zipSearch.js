@@ -75,7 +75,7 @@ function LookupZip() {
         <h3>
           {city} {state}
         </h3>
-        <LookupWeather details={details} setLoading={setLoading} />
+        <LookupWeather details={details} />
       </div>
     );
   } else if (loading === true) {

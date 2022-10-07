@@ -55,6 +55,10 @@ function LookupZip() {
   if (loading === false) {
     return (
       <div>
+        <h4>
+          * This is a Work in Progress. Currently Not All ZipCodes Will Work and
+          in Small Cases None Will Work. Use 66502 to Test.*
+        </h4>
         <div id="searchBar">
           <input
             id="zipCode"
